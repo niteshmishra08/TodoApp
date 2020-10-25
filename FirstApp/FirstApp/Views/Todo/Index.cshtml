@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Data.Models.ToDo>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Task)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Priority)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompletePercentage)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Task)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Priority)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletePercentage)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TodoId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TodoId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TodoId })
+        </td>
+    </tr>
+}
+
+</table>

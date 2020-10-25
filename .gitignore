@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/FirstApp/Data/bin/Debug
+/FirstApp/Data/obj/Debug
+/FirstApp/FirstApp/bin
+/FirstApp/FirstApp/obj/Debug
+/FirstApp/packages
