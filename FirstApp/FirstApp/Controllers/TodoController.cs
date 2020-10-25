@@ -5,26 +5,28 @@ using System.Web.Mvc;
 using Data.Common;
 using Data.Models;
 using AutoMapper;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace FirstApp.Controllers
 {
     public class TodoController : Controller
     {
-
-       public TodoContext objDataContext = new TodoContext();
-
         private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
 
-        public TodoController(IUnitOfWork unitOfWork)
+        public TodoController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            this._uow = unitOfWork;
+            _uow = unitOfWork;
+            _mapper = mapper;
         }
 
         // GET: Todo
         public ActionResult Index()
         {
-
-            return View(_uow.Repository<ToDo>().GetList());
+            var toDo = _uow.Repository<ToDo>().GetList();
+            var toDoDto = _mapper.Map<IEnumerable<ToDoDto>>(toDo);
+            return View(toDoDto);
         }
 
         // GET: Todo/Details/5
@@ -41,7 +43,7 @@ namespace FirstApp.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(Data.Models.ToDo ToDo )
+        public ActionResult Create(Data.Models.ToDo ToDo)
         {
             _uow.Repository<ToDo>().Add(ToDo);
 
@@ -52,7 +54,7 @@ namespace FirstApp.Controllers
             return RedirectToAction("Index");
         }
         // POST: Todo/Create
-     
+
 
         // GET: Todo/Edit/5
         public ActionResult Edit(int id)
